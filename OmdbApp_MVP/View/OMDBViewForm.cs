@@ -28,13 +28,15 @@ namespace OmdbApp_MVP.View
         {
             if (listBox1.SelectedItem != null)
             {
-                var selectedMovie = listBox1.SelectedItem as Movie;
+                var selectedTitle = listBox1.SelectedItem as string;
+                var selectedMovie = movies?.FirstOrDefault(x => x.Title == selectedTitle);
                 if (selectedMovie != null)
                 {
                     pictureBox1.Image = await LoadImageFromUrl(selectedMovie.Poster!);
                 }
             }
         }
+
 
         private static async Task<Image> LoadImageFromUrl(string poster)
         {
@@ -62,7 +64,7 @@ namespace OmdbApp_MVP.View
                         foreach (var item in root.Search)
                         {
                             AddHandler.Invoke(sender, e);
-                            listBox1.Items.Add(item);
+                            listBox1.Items.Add(item.Title!);
                             movies!.Add(item);
                             using var imageResponse = await client.GetAsync(item.Poster);
                             if (imageResponse.IsSuccessStatusCode)

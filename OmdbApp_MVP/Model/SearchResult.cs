@@ -1,6 +1,6 @@
 ﻿namespace OmdbApp_MVP.Model
 {
-    internal class SearchResult
+    internal class SearchResult // Model
     {
         public List<Movie>? Search { get; set; }
         public int TotalResults { get; set; }
